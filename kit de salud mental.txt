@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kit de Recomendaciones para la Salud Mental</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ===== TOKENS ===== */
+    :root {
+      --verde-oscuro:   #2d6a4f;
+      --verde-medio:    #52b788;
+      --verde-claro:    #b7e4c7;
+      --verde-suave:    #d8f3dc;
+      --lila-oscuro:    #7b5ea7;
+      --lila-medio:     #a98bcf;
+      --lila-claro:     #d9c8f0;
+      --lila-suave:     #f0eafc;
+      --blanco:         #ffffff;
+      --gris-texto:     #3a3a3a;
+      --gris-suave:     #f7f7f7;
+      --fuente-display: 'Lora', serif;
+      --fuente-cuerpo:  'Inter', sans-serif;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--fuente-cuerpo);
+      color: var(--gris-texto);
+      background-color: var(--blanco);
+      line-height: 1.7;
+    }
+
+    /* ===== BARRA DE NAVEGACION ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--blanco);
+      border-bottom: 2px solid var(--verde-claro);
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .navbar-logo {
+      font-family: var(--fuente-display);
+      font-size: 1.05rem;
+      color: var(--verde-oscuro);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .navbar-logo span { color: var(--lila-oscuro); }
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--verde-oscuro);
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover {
+      background: var(--verde-suave);
+      color: var(--lila-oscuro);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--verde-suave) 0%, var(--lila-suave) 100%);
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=60') center/cover no-repeat;
+      opacity: 0.08;
+    }
+    .hero-content { position: relative; max-width: 720px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--lila-claro);
+      color: var(--lila-oscuro);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--fuente-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--verde-oscuro);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em {
+      color: var(--lila-oscuro);
+      font-style: italic;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: #555;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      text-decoration: none;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-cta:hover { background: var(--lila-oscuro); transform: translateY(-2px); }
+
+    /* ===== INDICE ===== */
+    .indice-section {
+      background: var(--blanco);
+      padding: 3.5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--lila-medio);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: var(--fuente-display);
+      font-size: 1.6rem;
+      color: var(--verde-oscuro);
+      margin-bottom: 1.75rem;
+    }
+    .indice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .indice-card {
+      background: var(--lila-suave);
+      border-left: 4px solid var(--lila-medio);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .indice-card:hover { background: var(--lila-claro); transform: translateX(4px); }
+    .indice-card span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--lila-oscuro);
+    }
+
+    /* ===== SECCIONES GENERALES ===== */
+    .content-section {
+      padding: 4rem 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .section-header { margin-bottom: 2rem; }
+    .section-divider {
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--verde-medio), var(--lila-medio));
+      border-radius: 2px;
+      margin-top: 0.5rem;
+    }
+
+    /* Layout dos columnas */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .two-col.reverse { direction: rtl; }
+    .two-col.reverse > * { direction: ltr; }
+
+    .section-img {
+      width: 100%;
+      border-radius: 16px;
+      object-fit: cover;
+      height: 280px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    /* Cards de recomendaciones */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: var(--blanco);
+      border-radius: 14px;
+      padding: 1.5rem;
+      border-top: 4px solid var(--verde-medio);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.12); transform: translateY(-3px); }
+    .card.lila { border-top-color: var(--lila-medio); }
+    .card h4 {
+      font-family: var(--fuente-display);
+      font-size: 1rem;
+      color: var(--verde-oscuro);
+      margin-bottom: 0.4rem;
+    }
+    .card.lila h4 { color: var(--lila-oscuro); }
+    .card p { font-size: 0.87rem; color: #555; line-height: 1.6; }
+
+    /* Lista de senales */
+    .signals-list {
+      list-style: none;
+      margin-top: 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.75rem;
+    }
+    .signals-list li {
+      background: var(--verde-suave);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .signals-list li .bullet {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--verde-medio);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .signals-list.lila li { background: var(--lila-suave); }
+    .signals-list.lila li .bullet { background: var(--lila-medio); }
+
+    /* Cita destacada */
+    .quote-block {
+      background: linear-gradient(135deg, var(--verde-oscuro), var(--lila-oscuro));
+      color: var(--blanco);
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    .quote-block blockquote {
+      font-family: var(--fuente-display);
+      font-size: 1.3rem;
+      font-style: italic;
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto 0.75rem;
+    }
+    .quote-block cite { font-size: 0.82rem; opacity: 0.8; }
+
+    /* Recursos emergencia */
+    .emergency-box {
+      background: #fff4f4;
+      border: 2px solid #f4a0a0;
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin-top: 2rem;
+    }
+    .emergency-box h4 { color: #c0392b; margin-bottom: 0.5rem; font-size: 1rem; }
+    .emergency-box p { font-size: 0.88rem; color: #555; }
+    .emergency-box strong { color: #c0392b; }
+
+    /* ===== PIE DE PAGINA ===== */
+    footer {
+      background: var(--verde-oscuro);
+      color: rgba(255,255,255,0.75);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    footer .footer-logo {
+      font-family: var(--fuente-display);
+      font-size: 1.1rem;
+      color: var(--blanco);
+      margin-bottom: 0.5rem;
+    }
+    footer p { font-size: 0.8rem; }
+    footer a { color: var(--verde-claro); text-decoration: none; }
+
+    /* ===================================================================
+       ESTILOS DEL FORMULARIO
+       Conectar con base de datos al implementar el backend
+    =================================================================== */
+    #formulario {
+      background: var(--lila-suave);
+      padding: 3rem 2rem;
+      border-top: 3px solid var(--lila-claro);
+      border-bottom: 3px solid var(--lila-claro);
+    }
+    #formulario .form-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #formulario h2 {
+      font-family: var(--fuente-display);
+      font-size: 1.5rem;
+      color: var(--verde-oscuro);
+      margin-bottom: 0.4rem;
+    }
+    #formulario p.form-desc {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1.75rem;
+    }
+    #formulario label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gris-texto);
+      margin-bottom: 0.3rem;
+    }
+    #formulario input[type="text"],
+    #formulario input[type="email"],
+    #formulario input[type="tel"],
+    #formulario select,
+    #formulario textarea {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: var(--blanco);
+      color: var(--gris-texto);
+      margin-bottom: 1.1rem;
+    }
+    #formulario input:focus,
+    #formulario select:focus,
+    #formulario textarea:focus {
+      outline: none;
+      border-color: var(--lila-medio);
+      box-shadow: 0 0 0 3px var(--lila-claro);
+    }
+    #formulario textarea { resize: vertical; min-height: 110px; }
+    #formulario .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.83rem;
+      color: #555;
+    }
+    #formulario .form-check input { margin-top: 3px; flex-shrink: 0; }
+    #formulario button[type="submit"] {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      border: none;
+      padding: 0.75rem 2rem;
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #formulario button[type="submit"]:hover { background: var(--lila-oscuro); }
+    /* === FIN ESTILOS FORMULARIO === */
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 680px) {
+      .two-col { grid-template-columns: 1fr; }
+      .two-col.reverse { direction: ltr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================
+     BARRA DE NAVEGACION
+============================= -->
+<nav class="navbar">
+  <a href="#inicio" class="navbar-logo">Kit de Salud <span>Mental</span></a>
+  <ul class="nav-links">
+    <li><a href="#que-es">Que es</a></li>
+    <li><a href="#senales">Senales</a></li>
+    <li><a href="#habitos">Habitos</a></li>
+    <li><a href="#emociones">Emociones</a></li>
+    <li><a href="#apoyo">Red de apoyo</a></li>
+    <li><a href="#recursos">Recursos</a></li>
+    <li><a href="#formulario">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- ============================
+     HERO / ENCABEZADO
+============================= -->
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <div class="hero-badge">Guia practica</div>
+    <h1>Kit de Recomendaciones para la <em>Salud Mental</em></h1>
+    <p>Un espacio para conocer, cuidar y fortalecer tu bienestar emocional con informacion accesible y herramientas concretas.</p>
+    <a href="#indice" class="hero-cta">Explorar el kit</a>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+  ██████████████████████████████████████████████████████████████████████
+  ██                                                                   ██
+  ██   INICIO DEL FORMULARIO DE CONTACTO                              ██
+  ██                                                                   ██
+  ██   CAMPOS:                                                         ██
+  ██     nombre        → TEXT     → nombre completo del usuario        ██
+  ██     correo        → EMAIL    → correo electronico                 ██
+  ██     telefono      → TEL      → numero de contacto (opcional)      ██
+  ██     motivo        → SELECT   → motivo de consulta                 ██
+  ██     mensaje       → TEXTAREA → descripcion libre                  ██
+  ██     aviso_privado → CHECKBOX → consentimiento de privacidad       ██
+  ██                                                                   ██
+  ██   ACCION: Definir action="" del form con la URL del endpoint      ██
+  ██   METODO: POST                                                    ██
+  ██   INTEGRACION: API REST / PHP / Node.js / Firebase / MySQL        ██
+  ██                                                                   ██
+  ██████████████████████████████████████████████████████████████████████
+====================================================================== -->
+
+<section id="formulario">
+  <div class="form-wrapper">
+    <h2>Contacto y orientacion</h2>
+    <p class="form-desc">favor de completar el formulario para poder llevar un registro de quienes visitan nuestra pagina.</p>
+
+    <!-- action="" y method="POST" se definen al conectar con el backend -->
+    <form action="" method="POST">
+
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+
+      <label for="correo">Correo electronico</label>
+      <input type="email" id="correo" name="correo" placeholder="correo@ejemplo.com" required>
+
+      <label for="telefono">Telefono (opcional)</label>
+      <input type="tel" id="telefono" name="telefono" placeholder="55 1234 5678">
+
+
+
+      <label for="mensaje">Mensaje</label>
+      <textarea id="mensaje" name="mensaje" placeholder="Escribe aqui tu mensaje o situacion..." required></textarea>
+
+      
+      <button type="submit">Enviar mensaje</button>
+
+    </form>
+  </div>
+</section>
+
+<!-- =====================================================================
+  FIN DEL FORMULARIO DE CONTACTO
+====================================================================== -->
+
+
+<!-- ============================
+     INDICE DE CONTENIDOS
+============================= -->
+<section class="indice-section" id="indice">
+  <div class="section-label">Contenido</div>
+  <h2 class="section-title">Que encontraras aqui</h2>
+  <div class="indice-grid">
+    <a href="#que-es" class="indice-card">
+      <span>Que es la salud mental</span>
+    </a>
+    <a href="#senales" class="indice-card">
+      <span>Senales de alerta</span>
+    </a>
+    <a href="#habitos" class="indice-card">
+      <span>Habitos saludables</span>
+    </a>
+    <a href="#emociones" class="indice-card">
+      <span>Gestion emocional</span>
+    </a>
+    <a href="#apoyo" class="indice-card">
+      <span>Red de apoyo</span>
+    </a>
+    <a href="#recursos" class="indice-card">
+      <span>Recursos y ayuda</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============================
+     SECCION 1: QUE ES
+============================= -->
+<section class="content-section" id="que-es">
+  <div class="section-header">
+    <div class="section-label">Apartado 1</div>
+    <h2 class="section-title">Que es la salud mental</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="two-col">
+    <div>
+      <p>La salud mental abarca nuestro bienestar emocional, psicologico y social. Influye en como pensamos, sentimos y actuamos frente a la vida cotidiana. Tambien determina como manejamos el estres, nos relacionamos con los demas y tomamos decisiones.</p>
+      <br/>
+      <p>No es la simple ausencia de una enfermedad: es un estado de equilibrio que permite a cada persona desarrollar su potencial, hacer frente a las tensiones normales de la vida, trabajar de forma productiva y contribuir a su comunidad.</p>
+      <br/>
+      <p><strong>La salud mental importa en todas las etapas de la vida</strong>, desde la infancia hasta la vejez, y puede verse afectada por factores biologicos, experiencias de vida y antecedentes familiares.</p>
+    </div>
+    <img
+      src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=700&q=75"
+      alt="Persona meditando en calma"
+      class="section-img"
+    />
+  </div>
+</section>
+
+<!-- CITA DESTACADA -->
+<div style="padding: 0 2rem;">
+  <div class="quote-block" style="max-width:960px; margin: 0 auto;">
+    <blockquote>"No hay salud sin salud mental."</blockquote>
+    <cite>Organizacion Mundial de la Salud (OMS)</cite>
+  </div>
+</div>
+
+<!-- ============================
+     SECCION 2: SENALES DE ALERTA
+============================= -->
+<section style="background: var(--gris-suave); padding: 4rem 2rem;" id="senales">
+  <div style="max-width:960px; margin:0 auto;">
+    <div class="section-header">
+      <div class="section-label">Apartado 2</div>
+      <h2 class="section-title">Senales de alerta</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="two-col reverse">
+      <img
+        src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=700&q=75"
+        alt="Persona pensativa mirando por la ventana"
+        class="section-img"
+      />
+      <div>
+        <p>Reconocer las senales de alerta a tiempo puede marcar una gran diferencia. Presta atencion si tu o alguien cercano presenta:</p>
+        <ul class="signals-list lila">
+          <li><span class="bullet"></span>Tristeza persistente o sensacion de vacio</li>
+          <li><span class="bullet"></span>Cambios bruscos de humor sin causa aparente</li>
+          <li><span class="bullet"></span>Perdida de interes en actividades que antes disfrutabas</li>
+          <li><span class="bullet"></span>Dificultad para concentrarse o tomar decisiones</li>
+          <li><span class="bullet"></span>Fatiga extrema o falta de energia constante</li>
+          <li><span class="bullet"></span>Cambios en el apetito o el sueno</li>
+          <li><span class="bullet"></span>Aislamiento social o evitar a familiares y amigos</li>
+          <li><span class="bullet"></span>Pensamientos negativos recurrentes o de desesperanza</li>
+        </ul>
+        <br/>
+        <p style="font-size:0.88rem; color:#666;">Si alguna de estas senales persiste mas de dos semanas, es recomendable consultar a un profesional de salud mental.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECCION 3: HABITOS SALUDABLES
+============================= -->
+<section class="content-section" id="habitos">
+  <div class="section-header">
+    <div class="section-label">Apartado 3</div>
+    <h2 class="section-title">Habitos saludables para tu bienestar</h2>
+    <div class="section-divider"></div>
+  </div>
+  <p style="max-width:620px;">Pequenos cambios en la rutina diaria tienen un impacto real en como te sientes:</p>
+  <div class="cards-grid">
+    <div class="card">
+      <h4>Cuida tu sueno</h4>
+      <p>Dormir entre 7 y 9 horas regula el estado de animo, la memoria y la capacidad de respuesta ante el estres.</p>
+    </div>
+    <div class="card">
+      <h4>Mueve tu cuerpo</h4>
+      <p>30 minutos de actividad fisica al dia liberan endorfinas y reducen sintomas de ansiedad y depresion.</p>
+    </div>
+    <div class="card">
+      <h4>Alimentacion equilibrada</h4>
+      <p>Existe una conexion directa entre intestino y cerebro. Una dieta rica en vegetales y frutas nutre tu mente.</p>
+    </div>
+    <div class="card">
+      <h4>Desconexion digital</h4>
+      <p>Establece momentos sin pantallas. El sobreconsumo de redes sociales se asocia con mayor ansiedad e inseguridad.</p>
+    </div>
+    <div class="card">
+      <h4>Tiempo en la naturaleza</h4>
+      <p>Pasar tiempo al aire libre, incluso 20 minutos, reduce el cortisol y mejora el estado de animo.</p>
+    </div>
+    <div class="card">
+      <h4>Escritura reflexiva</h4>
+      <p>Escribir sobre tus pensamientos y emociones ayuda a procesarlos e identificar patrones que te afectan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECCION 4: GESTION EMOCIONAL
+============================= -->
+<section style="background: var(--gris-suave); padding: 4rem 2rem;" id="emociones">
+  <div style="max-width:960px; margin:0 auto;">
+    <div class="section-header">
+      <div class="section-label">Apartado 4</div>
+      <h2 class="section-title">Gestion emocional</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <p>Gestionar las emociones no significa suprimirlas: significa aprender a reconocerlas, nombrarlas y responder a ellas de forma consciente.</p>
+        <br/>
+        <p>Algunas tecnicas utiles:</p>
+        <ul class="signals-list" style="margin-top:1rem;">
+          <li><span class="bullet"></span><strong>Respiracion diafragmatica:</strong> inhala 4 s, reten 4 s, exhala 6 s. Activa el sistema nervioso parasimpatico.</li>
+          <li><span class="bullet"></span><strong>Tecnica 5-4-3-2-1:</strong> nombra 5 cosas que ves, 4 que tocas, 3 que escuchas, 2 que hueles, 1 que saboreas.</li>
+          <li><span class="bullet"></span><strong>Mindfulness:</strong> practica la atencion plena 10 minutos al dia con guias de meditacion.</li>
+          <li><span class="bullet"></span><strong>Etiqueta tus emociones:</strong> nombrar lo que sientes activa la corteza prefrontal y reduce la intensidad emocional.</li>
+          <li><span class="bullet"></span><strong>Movimiento consciente:</strong> el yoga, el baile o caminar son formas de regular el sistema nervioso.</li>
+        </ul>
+      </div>
+      <img
+        src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=700&q=75"
+        alt="Persona practicando meditacion al amanecer"
+        class="section-img"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECCION 5: RED DE APOYO
+============================= -->
+<section class="content-section" id="apoyo">
+  <div class="section-header">
+    <div class="section-label">Apartado 5</div>
+    <h2 class="section-title">Construye tu red de apoyo</h2>
+    <div class="section-divider"></div>
+  </div>
+  <p style="max-width:640px; margin-bottom:1.5rem;">No tenemos que atravesar los momentos dificiles solos. Las relaciones significativas son uno de los factores protectores mas importantes para la salud mental.</p>
+  <div class="cards-grid">
+    <div class="card lila">
+      <h4>Familia y amigos</h4>
+      <p>Comparte tus sentimientos con personas de confianza. Pedir ayuda es un acto de valentia, no de debilidad.</p>
+    </div>
+    <div class="card lila">
+      <h4>Profesionales de salud</h4>
+      <p>Psicologos, psiquiatras y terapeutas ofrecen herramientas especializadas. Buscar atencion profesional es una decision inteligente.</p>
+    </div>
+    <div class="card lila">
+      <h4>Grupos de apoyo</h4>
+      <p>Comunidades presenciales o en linea donde personas con experiencias similares se acompanan mutuamente.</p>
+    </div>
+    <div class="card lila">
+      <h4>Entornos institucionales</h4>
+      <p>Escuelas, centros de trabajo y centros comunitarios ofrecen cada vez mas recursos de bienestar emocional accesibles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SECCION 6: RECURSOS Y AYUDA
+============================= -->
+<section style="background: var(--verde-suave); padding: 4rem 2rem;" id="recursos">
+  <div style="max-width:960px; margin:0 auto;">
+    <div class="section-header">
+      <div class="section-label">Apartado 6</div>
+      <h2 class="section-title">Recursos y ayuda disponible</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="two-col">
+      <img
+        src="https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=700&q=75"
+        alt="Terapeuta y paciente en sesion de apoyo"
+        class="section-img"
+      />
+      <div>
+        <p>Existen multiples recursos gratuitos y accesibles. No dudes en acudir a ellos:</p>
+        <ul class="signals-list" style="margin-top: 1rem;">
+          <li><span class="bullet"></span>Centros de Salud Mental comunitarios (CSMD) del IMSS e ISSSTE en Mexico</li>
+          <li><span class="bullet"></span>Linea de la Vida: <strong>800 911 2000</strong> (atencion 24/7 en Mexico)</li>
+          <li><span class="bullet"></span>SAPTEL: <strong>55 5259-8121</strong> (Crisis y apoyo emocional)</li>
+          <li><span class="bullet"></span>Apps de meditacion: Calm, Headspace, Petit BamBou (en espanol)</li>
+          <li><span class="bullet"></span>Plataformas de terapia online: BetterHelp, Terapify, Psicologia Online</li>
+          <li><span class="bullet"></span>Recursos de la OMS: apps mhGAP de autoayuda basada en evidencia</li>
+        </ul>
+        <div class="emergency-box">
+          <h4>Si estas en crisis ahora mismo</h4>
+          <p>Llama a la <strong>Linea de la Vida 800 911 2000</strong> o acude a urgencias del hospital mas cercano. No estas solo/a. La ayuda esta disponible ahora mismo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     PIE DE PAGINA
+============================= -->
+<footer>
+  <div class="footer-logo">Kit de Salud Mental</div>
+  <p>Esta pagina es de caracter informativo y no sustituye la atencion de un profesional de la salud.</p>
+  <p style="margin-top:0.5rem;">Informacion basada en recomendaciones de la <a href="https://www.who.int/es/news-room/fact-sheets/detail/mental-health-strengthening-our-response" target="_blank">OMS</a> y fuentes clinicas verificadas.</p>
+</footer>
+
+</body>
+</html>
